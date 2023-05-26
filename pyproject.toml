@@ -1,8 +1,4 @@
 [tool.pdm]
-[tool.pdm.dev-dependencies]
-test = [
-    "pytest>=7.3.1",
-]
 
 [project]
 name = "tasker.py"
@@ -11,8 +7,19 @@ description = "Automatize seu android com python"
 authors = [
     {name = "Bruno Davi", email = "48166556+brunodavi@users.noreply.github.com"},
 ]
+
 dependencies = [
     "httpx>=0.24.1",
 ]
+
 requires-python = ">=3.11"
 license = {text = "MIT"}
+
+
+[tool.pdm.scripts]
+test = "pytest -v -s"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.3.1",
+]
