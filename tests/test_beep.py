@@ -1,5 +1,7 @@
-from tasker_py import TaskerPy, Stream
-from tasker_py.actions.alert import Beep
+from tasker.py import TaskerPy
+
+from tasker import Stream
+from tasker.actions.alert import Beep
 
 
 def test_padroes():
@@ -10,6 +12,22 @@ def test_padroes():
     assert beep.amplitude == 50
 
     assert beep.stream == Stream.MEDIA
+
+
+def test_modifica_atributos_na_definicao():
+    beep = Beep(
+        frequency=80,
+        duration=100,
+        amplitude=5,
+
+        stream=Stream.CALL,
+    )
+
+    assert beep.frequency == 80
+    assert beep.duration == 100
+    assert beep.amplitude == 5
+
+    assert beep.stream == Stream.CALL
 
 
 def test_contexto_de_criacao():
@@ -30,7 +48,7 @@ def test_contexto_de_criacao():
             '3',
         )
 
-    task_beep.play()
+    task_beep()
 
 
 def test_fora_do_contexto_de_criacao():
