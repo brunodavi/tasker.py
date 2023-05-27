@@ -1,6 +1,4 @@
 class Action:
-    _params = {}
-
     _NEW_INIT = (
         'lambda self, {params}: '
         '[ '
@@ -13,21 +11,36 @@ class Action:
 
     def __init__(self):
         cls = self.__class__
-        attrs =  vars(cls)
+        params = self.__get_params(cls)
 
-        for key, value in attrs.items():
-            if self.__is_static(key, value):
-                cls._params[key] = value
-
-        if not len(cls._params):
+        if not len(params):
             raise AttributeError(
                 'Nenhum parametro encontrado, '
                 'defina um parâmetro na classe: '
                 f'{cls.__name__}.'
             )
 
-    # def __new__(cls):
-        params = cls._params.keys()
+        cls.__init__ = self.__create_init(params)
+
+
+    def __create_init(self, params):
+        serialized_params = (
+            self
+            .__serialize_params(params)
+        )
+
+        code = (
+            self
+            ._NEW_INIT
+            .format(params=serialized_params)
+        )
+
+        new_init = eval(code, {}, {})
+        new_init.__name__ = '__init__'
+
+        return new_init
+
+    def __serialize_params(self, params):
         params = map(
             lambda key: f'{key}=None',
             params,
@@ -35,19 +48,16 @@ class Action:
 
         params = ', '.join(params)
 
-        code = (
-            cls
-                ._NEW_INIT
-                .format(params=params)
-        )
+        return params
 
-        __new_init = eval(code, {}, {})
-        __new_init.__name__ = '__init__'
+    def __get_params(self, cls):
+        return [
+            key
+            for key in vars(cls).keys()
+            if self.__is_static(key)
+        ]
 
-        cls.__init__ = __new_init
-
-
-    def __is_static(self, attr_name, attr_value):
+    def __is_static(self, attr_name):
         not_dunder = attr_name[0] != '_'
         is_alpha_numeric = attr_name.isalnum()
 
