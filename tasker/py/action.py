@@ -1,3 +1,5 @@
+from re import match
+
 class Action:
     _NEW_INIT = (
         'lambda self, {params}: '
@@ -8,8 +10,10 @@ class Action:
         '] and None or None'
     )
 
+    _is_context_creator = False
 
-    def __init__(self):
+
+    def __init__(self, *args, **kwargs):
         cls = self.__class__
         params = self.__get_params(cls)
 
@@ -22,6 +26,11 @@ class Action:
 
         cls.__init__ = self.__create_init(params)
 
+    def __call__(self):
+        if self._is_context_creator:
+            return self.create_action()
+
+        return self.take_action()
 
     def __create_init(self, params):
         serialized_params = (
@@ -51,18 +60,29 @@ class Action:
         return params
 
     def __get_params(self, cls):
-        return [
-            key
-            for key in vars(cls).keys()
-            if self.__is_static(key)
-        ]
+        result = []
 
-    def __is_static(self, attr_name):
-        not_dunder = attr_name[0] != '_'
-        is_alpha_numeric = attr_name.isalnum()
+        for key in vars(cls).keys():
+            if self.__is_static(key):
+                result.append(key)
 
-        return (
-            not_dunder
-            and
-            is_alpha_numeric
+        return result
+
+    def __is_static(self, attr_name: str):
+        result = match(
+            r'^[A-Za-z0-9][A-Za-z_0-9]*[A-Za-z0-9]?$',
+            attr_name
         )
+
+        not_is_dunder_and_is_alphanum = (
+            result is not None
+        )
+
+        return not_is_dunder_and_is_alphanum
+
+
+    def create_action(self):
+        return None
+
+    def take_action(self):
+        return None
