@@ -21,12 +21,7 @@ def test__ignore_attribute_nao_existe(action_test):
         action_test._ignored_attribute
 
 def test_erro_ao_escrever_o_nome_do_argumento_errado():
-    with raises(
-        TypeError,
-        match=(
-            "ActionTest got an unexpected"
-            " keyword argument 'invalid_arg'")
-    ):
+    with raises(KeyError):
         ActionTest(invalid_arg=0)
 
 def test_sem_argumetos_continua_com_padroes(action_test):
@@ -34,7 +29,7 @@ def test_sem_argumetos_continua_com_padroes(action_test):
     assert action_test.attribute_b == 123
     assert action_test.attribute_c == True
 
-def test_argumentos_nomeados_ao_instaciar_a_class():
+def test_argumentos_nomeados_ao_instanciar_a_class():
     action_test = ActionTest(
         attribute_a='OPQ',
         attribute_b=False,
@@ -68,9 +63,9 @@ def test_alterar_argumentos_e_atributos():
         attribute_c=False
     )
 
-    action_test.attribute_c = None
-    action_test.attribute_a = 1001011
+    action_test.attribute_c = True
+    action_test.attribute_a = '1001011'
 
-    assert action_test.attribute_a == 1001011
+    assert action_test.attribute_a == '1001011'
     assert action_test.attribute_b == 0
-    assert action_test.attribute_c == None
+    assert action_test.attribute_c == True

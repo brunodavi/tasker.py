@@ -1,22 +1,14 @@
-from tasker.py import TaskerPy
+from tasker.py import TaskerPy, Task
 from tasker.actions.alert import Beep
 
 
-def test_contexto_de_criacao():
+def test_criar_tarefa():
     app = TaskerPy()
     beep = Beep()
 
     @app.add_task('Task Name')
     def task():
-        beep()
+        beep.add_action()
 
-    task()
-
-    assert beep.create_action.called()
-
-
-def test_fora_do_contexto_de_criacao():
-    beep = Beep()
-    beep()
-
-    assert beep.take_action.called()
+    assert isinstance(task, Task)
+    assert task.name == 'Task Name'
