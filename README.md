@@ -54,7 +54,7 @@ app = TaskerPy()
 @app.add_task(name='Mostrar Popup')
 def hello_world():
   show_popup = Toast('Olá, Mundo')
-  show_popup()
+  show_popup.add_action()
 
 
 @app.add_task('Task to notify')
@@ -62,7 +62,7 @@ def notify_hello_world(title: str):
   notify = Notify(title, text='Um subtitulo')
   notify.priority = 5
 
-  notify.add_button(
+  notify.add_button1(
     label='Mostrar Mensagem',
     hello_world,
   )
