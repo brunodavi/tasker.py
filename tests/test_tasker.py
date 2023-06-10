@@ -12,3 +12,4 @@ def test_criar_tarefa():
 
     assert isinstance(task, Task)
     assert task.name == 'Task Name'
+
