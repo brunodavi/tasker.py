@@ -17,7 +17,7 @@ license = {text = "MIT"}
 
 
 [tool.pdm.scripts]
-test = "pytest -v -s"
+test = "pytest -vv -s"
 
 [tool.pdm.dev-dependencies]
 test = [
