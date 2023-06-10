@@ -1,20 +1,10 @@
 from re import match
 
+from tasker.client import TaskerClient
+
 class Action:
-    _is_context_creator = False
-
-
     def __init__(self, *args, **kwargs):
-        cls = self.__class__
-
-        props, max_props = self.__get_props(cls)
-        max_args = len(args)
-
-        if max_args > max_props:
-            raise IndexError(
-                f"{max_args} passou do limite "
-                f"de propriedades ({max_props})"
-            )
+        props = self.__get_props()
 
         for index, arg in enumerate(args):
             key = props[index]
@@ -26,12 +16,27 @@ class Action:
                 setattr(self, key, arg)
             else:
                 raise KeyError(
-                    f"'{key}' não existe como "
-                    "propriedade dessa ação."
+                    f"'{key}' essa propriedade "
+                    'não existe.'
                 )
 
+    def __call__(self, *args, **kwargs):
+        cls = self.__class__
+        module = cls.__module__
 
-    def __get_props(self, cls):
+        (*_, category, action) = (
+            module.split('.')
+        )
+
+        path = f'/{category}/{action}'
+        data = self.__seralize_to_dict()
+
+        tasker_client = TaskerClient()
+        return tasker_client.post(path, json=data)
+
+
+    def __get_props(self):
+        cls = self.__class__
         props = []
 
         all_props = vars(cls).keys()
@@ -44,16 +49,7 @@ class Action:
             else:
                 delattr(cls, key)
 
-        max_props = len(props)
-
-        if not max_props:
-            raise AttributeError(
-                'Nenhum parametro encontrado, '
-                'defina um parâmetro na classe: '
-                f'{cls.__name__}.'
-            )
-
-        return props, max_props
+        return props
 
     def __is_static(self, attr_name: str):
         result = match(
@@ -66,6 +62,16 @@ class Action:
         )
 
         return not_is_dunder_and_is_alphanum
+
+
+    def __seralize_to_dict(self):
+        props = self.__get_props()
+        data = {}
+
+        for prop in props:
+            data[prop] = getattr(self, prop)
+
+        return data
 
 
     def add_action(self):
