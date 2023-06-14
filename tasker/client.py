@@ -10,7 +10,8 @@ class TaskerClient(Client):
         ):
 
         super().__init__(
-                base_url=f'http://{adderess}:{port}'
+            base_url=f'http://{adderess}:{port}',
+            timeout=30,
         )
 
 del Client
