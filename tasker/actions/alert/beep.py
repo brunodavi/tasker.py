@@ -1,18 +1,12 @@
+from dataclasses import dataclass
+
 from tasker.py import Action
 from tasker import Stream
 
-
+@dataclass
 class Beep(Action):
-    def __init__(
-        self,
-        frequency = 8000,
-        duration = 1000,
-        amplitude = 50,
+    frequency: int = 8000
+    duration: int = 1000
+    amplitude: int = 50
 
-        stream = Stream.MEDIA,
-    ):
-        self.frequency = frequency
-        self.duration = duration
-        self.amplitude = amplitude
-
-        self.stream = stream
+    stream: int = Stream.MEDIA

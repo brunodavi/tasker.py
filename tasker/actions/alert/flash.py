@@ -1,13 +1,10 @@
+from dataclasses import dataclass
+
 from tasker.py import Action
 
 
+@dataclass
 class Flash(Action):
-    def __init__(
-        self,
-        text = '',
-        long = False,
-        immediately = True,
-    ):
-        self.text = text
-        self.long = long
-        self.immediately = immediately
+    text: str
+    long: bool = False
+    immediately: bool = True

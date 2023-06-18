@@ -1,27 +1,15 @@
-from tasker.py import Task, Action
+from dataclasses import dataclass
 
+from tasker.py import Action
 
+@dataclass
 class Notify(Action):
-    def __init__(
-        self,
-        title = '',
-		text = ' ',
-		icon = ' ',
-		permanent = False,
-		priority = 3,
-		repeat_alert = False,
-		sound_file = None,
-		vibration_pattern = None,
-		category = None
-    ):
-        self.title = title
-        self.text = text
-        self.icon = icon
-        self.permanent = permanent
-        self.priority = priority
-        self.repeat_alert = repeat_alert
-        self.sound_file = sound_file
-        self.vibration_pattern = vibration_pattern
-        self.category = category
-
-    def add_button1(label: str, task: Task): ...
+    title: str
+    text: str = None
+    icon: str = None
+    permanent: bool = False
+    priority: int = 3
+    repeat_alert: bool = False
+    sound_file: str = None
+    vibration_pattern: str = None
+    category: str = None

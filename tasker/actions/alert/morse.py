@@ -1,19 +1,12 @@
+from dataclasses import dataclass
+
 from tasker.py import Action
 from tasker import Stream
 
-
+@dataclass
 class Morse(Action):
-    def __init__(
-        self,
-        text = '',
-		frequency = 4000,
-		speed = 80,
-		amplitude = 50,
-		stream = Stream.MEDIA
-    ):
-        self.text = text
-        self.frequency = frequency
-        self.speed = speed
-        self.amplitude = amplitude
-        self.stream = stream
-
+    text: str
+    frequency: int = 4000
+    speed: int = 80
+    amplitude: int = 50
+    stream: Stream = Stream.MEDIA
