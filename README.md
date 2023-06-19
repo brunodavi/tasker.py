@@ -23,7 +23,7 @@ Crie tarefas e as execute de forma simples
 ```python
 #!/usr/bin/env python3
 
-from tasker.py import TaskerPy
+from tasker.py import TaskerPy, Task
 
 from tasker.actions.alert import (
   Flash as Toast,
@@ -35,16 +35,16 @@ app = TaskerPy()
 
 
 @app.add_task(name='Mostrar Popup')
-def hello_world():
+def hello_world(t: Task):
   show_popup = Toast('Olá, Mundo')
   show_popup.long = True
 
-  show_popup.add_action()
+  t.add_action(show_popup)
 
 
 @app.add_task('Tarefa para notificar')
-def notify_hello_world(title: str):
-  notify = Notify(title, text='Um subtitulo')
+def notify_hello_world(t: Task):
+  notify = Notify(t.par1, text='Um subtitulo')
   notify.priority = 5
 
   notify.add_button1(
@@ -52,7 +52,7 @@ def notify_hello_world(title: str):
     hello_world,
   )
 
-  notify.add_action()
+  t.add_action(notify)
 
 notify_hello_world('Notifique um olá, mundo')
 ```
@@ -62,7 +62,7 @@ Exporte tarefas do TaskerPy
 ```python
 #!/usr/bin/env python3
 
-from tasker.py import TaskerPy
+from tasker.py import TaskerPy Task
 
 from tasker.actions.alert import (
   Flash as Toast
@@ -71,12 +71,12 @@ from tasker.actions.alert import (
 
 app = TaskerPy()
 
-@app.add_task()
-def task():
+@app.add_task
+def task(t: Task):
     toast = Toast('Olá')
     toast.long = True
 
-    toast.add_action()
+    t.add_action(toast)
 
 # Exporta a tarefa para /sdcard/Tasker/tasks/task.tsk.xml
 task.export_xml()
