@@ -20,3 +20,18 @@ def test_criar_tarefa_e_ações():
 
     assert len(task.actions) == 4
     assert len(app.tasks) == 1
+
+def test_criar_tarefa_sem_nome():
+    app = TaskerPy()
+
+    @app.add_task()
+    def task(t: Task):
+        t.add_action(
+            Beep(duration=100)
+        )
+
+    assert isinstance(task, Task)
+    assert task.name == 'task'
+
+    assert len(task.actions) == 1
+    assert len(app.tasks) == 1
