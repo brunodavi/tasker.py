@@ -1,3 +1,4 @@
+from functools import wraps
 from dataclasses import dataclass, field
 
 from .client import TaskerPyClient
@@ -25,9 +26,9 @@ class TaskerPy:
             self.port
         )
 
-    def add_task(self, name: str):
+    def add_task(self, name: str | None = None):
         def decorator(func):
-            task = Task(name)
+            task = Task(name or func.__name__)
             func(task)
 
             self.tasks.append(task)
