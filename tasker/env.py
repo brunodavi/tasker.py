@@ -1,9 +1,13 @@
-from enum import Enum
+from dataclasses import asdict, dataclass
+
 from os import getenv
 
 
-class Env(str, Enum):
-    def __str__(self):
-        return getenv(self.value)
+@dataclass
+class Env:
+    TASKER_PY_PACKAGE: str = ''
 
-    TASKER_PY_PACKAGE = 'TASKER_PY_PACKAGE'
+    def __post_init__(self):
+        for attr in asdict(self):
+            env_var = getenv(attr)
+            setattr(self, attr, env_var)
