@@ -6,6 +6,7 @@ from os import getenv
 @dataclass
 class Env:
     TASKER_PY_PACKAGE: str = ''
+    TASKER_VERSION: str = ''
 
     def __post_init__(self):
         for attr in asdict(self):

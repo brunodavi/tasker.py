@@ -5,6 +5,8 @@ from tasker import Stream
 
 @dataclass
 class Beep(Action):
+    _code_ = 171 
+
     frequency: int = 8000
     duration: int = 1000
     amplitude: int = 50

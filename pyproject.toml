@@ -10,7 +10,8 @@ authors = [
 
 dependencies = [
     "httpx>=0.24.1",
-    "lxml>=4.9.2",
+    "cython>=3.0.0",
+    "lxml>=4.9.3",
 ]
 
 requires-python = ">=3.10"
