@@ -33,12 +33,8 @@ def test_task_xml_creator():
     xml_task = (
         xml_utils
             .create_task(
-                id=0,
-                name='task_test',
-
-                actions=[
-                    Beep(1000, 100)
-                ]
+                0, 'task_test',
+                Beep()
             )
     )
 
