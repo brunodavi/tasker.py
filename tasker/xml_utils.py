@@ -27,10 +27,9 @@ class XmlUtils:
 
    def _actions_to_xml(self, *actions: Action):
       for index, action in enumerate(actions):
-         if isinstance(action, tuple):
-            [action] = action
+        [action] = action
 
-         yield E.Action(
+        yield E.Action(
                E.code(f'{action._code_}'),
                *self._action_to_args(action),
 
@@ -39,12 +38,20 @@ class XmlUtils:
          )                    
 
 
-   def create_task(self, task_id: int, task_name: str, *actions: Action):
+   def create_task(
+           self,
+           task_id: int,
+           task_name: str,
+           *actions: Action
+        ):
       return self._create_data(
             E.Task(
-               E.id(f'{task_id}'),
-               E.nme(task_name),
-               *self._actions_to_xml(actions),
+                E.cdate("0"),
+                E.edate("1"),
+                E.id(f'{task_id}'),
+                E.nme(task_name),
+                E.pri("100"),
+                *self._actions_to_xml(actions),
 
                sr=f"task{task_id}"
             )

@@ -12,3 +12,5 @@ class Beep(Action):
     amplitude: int = 50
 
     stream: int = Stream.MEDIA
+
+    do_at_time: str = ''
