@@ -1,13 +1,17 @@
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Callable, Generator
+from copy import deepcopy
 
 from .action import Action
 from ..task_collision import TaskCollision
 
+
 @dataclass
 class Task:
     name: str
+    actions: Callable[..., Generator[Action, None, None]]
 
+    priority: int = 100
     collision: TaskCollision = (
         TaskCollision.ABORT_NEW_TASK
     )
@@ -17,13 +21,8 @@ class Task:
 
     variables: dict[str, Any] = field(default_factory=dict)
 
-    actions: list[Action] = field(default_factory=list)
-
 
     def __call__(self, *args, **kwargs):
-        ...
-
-
-    def add_action(self, action: Action):
-        self.actions.append(action)
+        for action in self.actions(self):
+            yield deepcopy(action)
 

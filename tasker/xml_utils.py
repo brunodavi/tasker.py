@@ -27,8 +27,6 @@ class XmlUtils:
 
    def _actions_to_xml(self, *actions: Action):
       for index, action in enumerate(actions):
-        [action] = action
-
         yield E.Action(
                E.code(f'{action._code_}'),
                *self._action_to_args(action),
@@ -51,7 +49,7 @@ class XmlUtils:
                 E.id(f'{task_id}'),
                 E.nme(task_name),
                 E.pri("100"),
-                *self._actions_to_xml(actions),
+                *self._actions_to_xml(*actions),
 
                sr=f"task{task_id}"
             )

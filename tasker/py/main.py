@@ -1,11 +1,14 @@
-from functools import wraps
-from dataclasses import dataclass, field
+from typing import Iterable, Callable
+from dataclasses import astuple, dataclass, field
+
 
 from .client import TaskerPyClient
 
 from .profile import Profile
 from .task import Task
 from .scene import Scene
+
+from .action import Action
 
 
 @dataclass
@@ -21,17 +24,24 @@ class TaskerPy:
 
 
     def __post_init__(self):
-        self.client = TaskerPyClient(
-            self.address,
-            self.port
-        )
+        if not self.client:
+            self.client = TaskerPyClient(
+                self.address,
+                self.port
+            )
+
 
     def add_task(self, name: str | None = None):
-        def decorator(func):
-            task = Task(name or func.__name__)
-            func(task)
+        def decorator(action_func):
+            task = Task(
+                name or action_func.__name__,
+                action_func
+            )
 
             self.tasks.append(task)
             return task
 
         return decorator
+    
+
+
