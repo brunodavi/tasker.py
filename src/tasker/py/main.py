@@ -1,5 +1,4 @@
-from typing import Iterable, Callable
-from dataclasses import astuple, dataclass, field
+from dataclasses import dataclass, field
 
 
 from .client import TaskerPyClient
@@ -7,8 +6,6 @@ from .client import TaskerPyClient
 from .profile import Profile
 from .task import Task
 from .scene import Scene
-
-from .action import Action
 
 
 @dataclass
@@ -20,7 +17,7 @@ class TaskerPy:
 
     profiles: list[Profile] = field(default_factory=list)
     tasks: list[Task] = field(default_factory=list)
-    scenea: list[Scene] = field(default_factory=list)
+    scenes: list[Scene] = field(default_factory=list)
 
 
     def __post_init__(self):

@@ -5,7 +5,12 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "cSpell.words": [
+        "cdate",
+        "dinglisch",
+        "edate",
+        "lxml",
         "pytest",
-        "tasker"
+        "tasker",
+        "taskerm"
     ]
 }
