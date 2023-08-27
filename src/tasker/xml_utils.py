@@ -2,8 +2,8 @@ from dataclasses import astuple
 
 from lxml.builder import E
 
-from tasker.py import Action
-from tasker import Stream
+from .py.action import Action
+from .stream import Stream
 
 
 class XmlUtils:
@@ -51,6 +51,6 @@ class XmlUtils:
                E.pri("100"),
                *self._actions_to_xml(*actions),
 
-               sr=f"task{task_id}"
+               sr="task"
             )
          )
