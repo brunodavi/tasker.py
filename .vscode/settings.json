@@ -8,8 +8,12 @@
         "cdate",
         "dinglisch",
         "edate",
+        "errmsg",
+        "httpx",
         "lxml",
         "pytest",
+        "sdcard",
+        "skipif",
         "tasker",
         "taskerm"
     ]
