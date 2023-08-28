@@ -1,5 +1,7 @@
-from tempfile import NamedTemporaryFile
-from pytest import fixture
+from os import getenv
+from pathlib import Path
+from dataclasses import dataclass
+from pytest import fixture, mark
 
 from tasker.py import TaskerPy, Task
 from tasker.actions.alert import Beep
@@ -47,6 +49,23 @@ def test_criar_tarefa_e_ações(app: TaskerPy):
     assert [*task()] == expected_actions
 
 
+def test__generate_id(app: TaskerPy):
+    @dataclass
+    class Item:
+        id: int
+
+    items = [
+        Item(1),
+        Item(2),
+        Item(3),
+    ]
+
+    randint_args = [1, 5]
+
+    assert app._generate_id(items, randint_args) in (4, 5)
+    assert app._generate_id(items, randint_args) in (4, 5)
+
+
 def test_iterar_2_vezes_a_mesma_tarefa(app: TaskerPy):
     expected_actions = [
         Beep(frequency=1000, duration=100),
@@ -74,9 +93,34 @@ def test_criar_tarefa_sem_nome(app: TaskerPy):
     assert len(app._tasks) == 1
 
 
-def test_exportar_tarefa(new_task: Task):
-    with NamedTemporaryFile('w') as tmp:
-        assert new_task.export(tmp.name) is int
-
 def test_converter_para_string(new_task: Task):
-    assert new_task.to_string() is str
+    xml_string = new_task.to_string()
+
+    assert isinstance(xml_string, str)
+
+
+def test_exportar_tarefa(tmp_path: Path, new_task: Task):
+    tmp_new_task = new_task.export(tmp_path)
+    xml_string = tmp_new_task.read_text()
+
+    assert tmp_new_task.exists()
+    assert '<nme>task</nme>' in xml_string
+
+
+@mark.skipif(not (getenv('ANDROID_DATA') or getenv('TASKER_PY_ADDRESS')), reason='Nenhum dispositivo Android encontrado')
+def test_importar_e_executar():
+    app = TaskerPy()
+
+    variables_returned = {
+        'var': r'%par1'
+    }
+
+    @app.add_task('TPY - Run', returned=variables_returned)
+    def task(t: Task):
+        t.par1 = 'test_returned'
+        yield Beep(1000, duration=100)
+
+    variables = task.play()
+
+    assert isinstance(variables, dict)
+    assert variables['var'] == 'test_returned'
