@@ -1,6 +1,9 @@
 [tool.pdm]
 [tool.pdm.scripts]
-test.cmd = "pytest -vv -s"
+test_all.cmd = "pytest -vv -s"
+test_all.env_file = '.env'
+
+test.cmd = "pytest -vv -s -k test_ -k 'not test_action'"
 test.env_file = '.env'
 
 [tool.pdm.dev-dependencies]
