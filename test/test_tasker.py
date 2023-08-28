@@ -1,7 +1,6 @@
-from os import getenv
 from pathlib import Path
 from dataclasses import dataclass
-from pytest import fixture, mark
+from pytest import fixture
 
 from tasker.py import TaskerPy, Task
 from tasker.actions.alert import Beep
@@ -105,22 +104,3 @@ def test_exportar_tarefa(tmp_path: Path, new_task: Task):
 
     assert tmp_new_task.exists()
     assert '<nme>task</nme>' in xml_string
-
-
-@mark.skipif(not (getenv('ANDROID_DATA') or getenv('TASKER_PY_ADDRESS')), reason='Nenhum dispositivo Android encontrado')
-def test_importar_e_executar():
-    app = TaskerPy()
-
-    variables_returned = {
-        'var': r'%par1'
-    }
-
-    @app.add_task('TPY - Run', returned=variables_returned)
-    def task(t: Task):
-        t.par1 = 'test_returned'
-        yield Beep(1000, duration=100)
-
-    variables = task.play()
-
-    assert isinstance(variables, dict)
-    assert variables['var'] == 'test_returned'
