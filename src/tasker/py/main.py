@@ -1,17 +1,16 @@
+from dataclasses import dataclass
 from os import getenv
 from random import randint
-from dataclasses import dataclass
 
 from .client import TaskerPyClient
-
 from .profile import Profile
-from .task import Task
 from .scene import Scene
+from .task import Task
 
 
 @dataclass
 class TaskerPy:
-    address: str = getenv('TASKER_PY_ADDRESS') or 'localhost'
+    address: str = getenv("TASKER_PY_ADDRESS") or "localhost"
     port: int = 9170
 
     def __post_init__(self):
@@ -33,7 +32,7 @@ class TaskerPy:
 
         if any((new_id == item.id for item in items)):
             return self._generate_id(items, randint_args)
-        
+
         return new_id
 
 
@@ -43,7 +42,8 @@ class TaskerPy:
             task_id: int = None,
             returned: dict[str, str] = None
         ):
-        if task_id is None: task_id = self._generate_id(self._tasks)
+        if task_id is None:
+            task_id = self._generate_id(self._tasks)
 
         def decorator(action_func):
             task = Task(

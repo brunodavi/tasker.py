@@ -6,15 +6,21 @@ test_all.env_file = '.env'
 test.cmd = "pytest -vv -s -k test_ -k 'not test_action'"
 test.env_file = '.env'
 
+lint = "ruff check ."
+format = "ruff check --fix ."
+
 [tool.pdm.dev-dependencies]
 test = [
     "pytest>=7.3.1",
 ]
+lint = [
+    "ruff>=0.0.286",
+]
 
 [project]
 name = "tasker.py"
-version = "0.2.0"
-description = "Automatize seu android com python"
+version = "0.2.1"
+description = "Ferramenta para programar automações do Tasker pelo python"
 authors = [
     {name = "Bruno Davi", email = "48166556+brunodavi@users.noreply.github.com"},
 ]

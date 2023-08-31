@@ -1,0 +1,48 @@
+select = ["D", "E", "F", "I", "Q", "N", "S", "W", "PT"]
+ignore = ["D100", "D105", "D417"]
+
+fixable = ["ALL"]
+unfixable = []
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+
+target-version = "py310"
+tab-size = 4
+line-length = 88
+
+
+[per-file-ignores]
+"__init__.py" = ["F401", "D104"]
+"test/*" = ["D", "S101"]
+
+[pydocstyle]
+convention = "google"
+
+[pylint]
+max-args = 5

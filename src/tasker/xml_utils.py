@@ -9,12 +9,12 @@ from .stream import Stream
 class XmlUtils:
    def _create_data(self, *datas: E):
       return E.TaskerData(*datas, sr="", dvi="1")
-   
+
    def _action_to_args(self, action: Action):
       action_args = astuple(action)
 
       for index, value in enumerate(action_args):
-            kwargs = {'sr': f"arg{index}"}
+            kwargs = {"sr": f"arg{index}"}
 
             match value:
                case Stream():
@@ -28,12 +28,12 @@ class XmlUtils:
    def _actions_to_xml(self, *actions: Action):
       for index, action in enumerate(actions):
          yield E.Action(
-               E.code(f'{action._code_}'),
+               E.code(f"{action._code_}"),
                *self._action_to_args(action),
 
                sr=f"act{index}",
                ve="7"
-         )                    
+         )
 
 
    def create_task(
@@ -46,7 +46,7 @@ class XmlUtils:
             E.Task(
                E.cdate("0"),
                E.edate("1"),
-               E.id(f'{task_id}'),
+               E.id(f"{task_id}"),
                E.nme(task_name),
                E.pri("100"),
                *self._actions_to_xml(*actions),
