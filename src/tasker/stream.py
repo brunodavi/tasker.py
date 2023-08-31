@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Stream(int, Enum):
     CALL = 0
     SYSTEM = 1

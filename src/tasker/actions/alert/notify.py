@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from tasker.py import Action
 
+
 @dataclass
 class Notify(Action):
     title: str

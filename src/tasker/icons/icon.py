@@ -1,4 +1,4 @@
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 
 from ..app_info import AppInfo
 
@@ -9,4 +9,4 @@ class Icon(str):
         res = AppInfo.RESOURCE.value
 
         for attr, icon in asdict(self).items():
-            setattr(self, attr, f'{res}/{icon}')
+            setattr(self, attr, f"{res}/{icon}")

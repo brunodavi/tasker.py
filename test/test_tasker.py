@@ -1,17 +1,17 @@
-from pathlib import Path
 from dataclasses import dataclass
-from pytest import fixture
+from pathlib import Path
 
-from tasker.py import TaskerPy, Task
+import pytest
 from tasker.actions.alert import Beep
+from tasker.py import Task, TaskerPy
 
 
-@fixture
+@pytest.fixture()
 def app():
     return TaskerPy()
 
 
-@fixture
+@pytest.fixture()
 def new_task(app: TaskerPy):
     @app.add_task()
     def task(t: Task):
@@ -31,7 +31,7 @@ def test_criar_tarefa_e_ações(app: TaskerPy):
     ]
 
 
-    @app.add_task('Task Name')
+    @app.add_task("Task Name")
     def task(t: Task):
         beep = Beep(1000, duration=100)
         yield beep
@@ -42,7 +42,7 @@ def test_criar_tarefa_e_ações(app: TaskerPy):
 
 
     assert isinstance(task, Task)
-    assert task.name == 'Task Name'
+    assert task.name == "Task Name"
 
     assert len(app._tasks) == 1
     assert [*task()] == expected_actions
@@ -71,7 +71,7 @@ def test_iterar_2_vezes_a_mesma_tarefa(app: TaskerPy):
         Beep(frequency=2000, duration=100)
     ]
 
-    @app.add_task(name='2_task')
+    @app.add_task(name="2_task")
     def task2_iters(t: Task):
         yield Beep(frequency=1000, duration=100)
         yield Beep(frequency=2000, duration=100)
@@ -86,7 +86,7 @@ def test_criar_tarefa_sem_nome(app: TaskerPy):
         yield Beep(duration=100)
 
     assert isinstance(task, Task)
-    assert task.name == 'task'
+    assert task.name == "task"
     assert [*task()] == [Beep(duration=100)]
 
     assert len(app._tasks) == 1
@@ -103,4 +103,4 @@ def test_exportar_tarefa(tmp_path: Path, new_task: Task):
     xml_string = tmp_new_task.read_text()
 
     assert tmp_new_task.exists()
-    assert '<nme>task</nme>' in xml_string
+    assert "<nme>task</nme>" in xml_string
