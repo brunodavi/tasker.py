@@ -1,11 +1,12 @@
 # TaskerPy
 
-Automatize seu Android com Python3 + Tasker
+Ferramenta para programar automações do Tasker pelo python
 
 
 ## Pré Requisitos
-- Tasker e Projeto Importado ou App do TaskerPy
-- Algum app com essa biblioteca instalada (ex: Termux, Qpython3, Pydroid e etc...)
+- Python3.7 ou superior
+- Tasker e Projeto Importado ou App do tasker.py
+- App com essa biblioteca instalada (ex: Termux, Qpython3, Pydroid e etc...)
 
 
 ## Guia Rápido
@@ -18,17 +19,11 @@ pip install tasker.py
 
 ### Demonstrações
 
-Crie tarefas e as execute de forma simples
+- [ ] Crie tarefas e as execute de forma simples
 
 ```python
-#!/usr/bin/env python3
-
 from tasker.py import TaskerPy, Task
-
-from tasker.actions.alert import (
-  Flash as Toast,
-  Notify
-)
+from tasker.actions.alert import Flash
 
 
 app = TaskerPy()
@@ -36,48 +31,36 @@ app = TaskerPy()
 
 @app.add_task(name='Mostrar Popup')
 def hello_world(t: Task):
-  show_popup = Toast('Olá, Mundo')
-  show_popup.long = True
-
-  t.add_action(show_popup)
+  yield Flash('Olá, mundo', long=True)
 
 
-@app.add_task('Tarefa para notificar')
-def notify_hello_world(t: Task):
-  notify = Notify(t.par1, text='Um subtitulo')
-  notify.priority = 5
-
-  notify.add_button1(
-    label='Mostrar Mensagem',
-    hello_world,
-  )
-
-  t.add_action(notify)
-
-notify_hello_world('Notifique um olá, mundo')
+# Importa a tarefa temporária e a executa
+hello_world.play()
 ```
 
-Exporte tarefas do TaskerPy
+- [ ] Sincronizar Projetos
 
 ```python
-#!/usr/bin/env python3
-
-from tasker.py import TaskerPy Task
-
-from tasker.actions.alert import (
-  Flash as Toast
-)
+from tasker.py import TaskerPy, Task
+from tasker.actions.alert import Flash
 
 
 app = TaskerPy()
+project_demo = app.add_project('Project Demo')
 
-@app.add_task
-def task(t: Task):
-    toast = Toast('Olá')
-    toast.long = True
 
-    t.add_action(toast)
+@project_demo.add_profile.time(
+  name='10h at 12h',
+  start='10:00',
+  end='12:00',
+)
+@project_demo.add_task('Alert')
+def alert(t: Task):
+  yield Flash('Alerting...')
+  yield Beep(1000, 100)
 
-# Exporta a tarefa para /sdcard/Tasker/tasks/task.tsk.xml
-task.export_xml()
+
+# Sincroniza os arquivos do Tasker
+# Adicionando/alterando os  projetos, tarefas, perfis e etc...
+app.sync()
 ```

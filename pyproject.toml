@@ -14,7 +14,7 @@ test = [
 [project]
 name = "tasker.py"
 version = "0.2.0"
-description = "Automatize seu android com python"
+description = "Ferramenta para programar automações do Tasker pelo python"
 authors = [
     {name = "Bruno Davi", email = "48166556+brunodavi@users.noreply.github.com"},
 ]
