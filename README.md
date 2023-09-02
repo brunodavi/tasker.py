@@ -21,8 +21,6 @@ pip install tasker.py
 Crie tarefas e as execute de forma simples
 
 ```python
-#!/usr/bin/env python3
-
 from tasker.py import TaskerPy, Task
 
 from tasker.actions.alert import (
@@ -60,8 +58,6 @@ notify_hello_world('Notifique um olá, mundo')
 Exporte tarefas do TaskerPy
 
 ```python
-#!/usr/bin/env python3
-
 from tasker.py import TaskerPy Task
 
 from tasker.actions.alert import (
