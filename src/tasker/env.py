@@ -1,5 +1,4 @@
 from dataclasses import asdict, dataclass
-
 from os import getenv
 
 

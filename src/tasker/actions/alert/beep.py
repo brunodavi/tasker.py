@@ -1,11 +1,12 @@
 from dataclasses import dataclass
 
-from tasker.py import Action
 from tasker import Stream
+from tasker.py import Action
+
 
 @dataclass
 class Beep(Action):
-    _code_ = 171 
+    _code_ = 171
 
     frequency: int = 8000
     duration: int = 1000

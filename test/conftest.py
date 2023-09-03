@@ -1,6 +1,6 @@
 from os import getenv
 
-from pytest import mark, Function
+from pytest import Function, mark
 
 
 def pytest_collection_modifyitems(session, config, items: list[Function]):

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from tasker.py import Action
 from tasker import Stream
+from tasker.py import Action
 
 
 @dataclass
