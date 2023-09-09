@@ -1,0 +1,32 @@
+site_name: TaskerPy
+repo_url: https://github.com/brunodavi/tasker.py
+repo_name: brunodavi/tasker.py
+edit_uri: tree/main/docs
+
+theme:
+  name: material
+  language: pt-BR
+  logo: assets/logo.png
+  favicon: assets/logo.png
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - pymdownx.tasklist
+
+extra_css:
+  - styles/extra.css
+
+watch:
+   - src/tasker
+
+plugins:
+- macros
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src/tasker]
+
+extra:
+  commands:
+    install: pip install tasker.py

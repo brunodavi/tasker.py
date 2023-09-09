@@ -6,7 +6,7 @@ groups = ["default", "test", "linter", "docs"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:b0cfe437795fc0d834fac79dc280110389f9a7218297fd06bc6e64dd504739e3"
+content_hash = "sha256:5e45a77e3f21456ba7e71c3a0b46e7d68c821bb555b4db0c017d9d3e743904e6"
 
 [[package]]
 name = "anyio"
@@ -465,6 +465,23 @@ files = [
 ]
 
 [[package]]
+name = "mkdocs-macros-plugin"
+version = "1.0.4"
+requires_python = ">=3.8"
+summary = "Unleash the power of MkDocs with macros and variables"
+dependencies = [
+    "jinja2",
+    "mkdocs>=0.17",
+    "python-dateutil",
+    "pyyaml",
+    "termcolor",
+]
+files = [
+    {file = "mkdocs-macros-plugin-1.0.4.tar.gz", hash = "sha256:fc601f142b89cf98743b6b3608d5f93f24daf69b88cfa2320d503c83723c3c6d"},
+    {file = "mkdocs_macros_plugin-1.0.4-py3-none-any.whl", hash = "sha256:c8169443d17212e32df5ad68b562d901acc936d6e87f6b41139dcf13d6659890"},
+]
+
+[[package]]
 name = "mkdocs-material"
 version = "9.2.8"
 requires_python = ">=3.7"
@@ -778,6 +795,16 @@ summary = "Sniff out which async library your code is running under"
 files = [
     {file = "sniffio-1.3.0-py3-none-any.whl", hash = "sha256:eecefdce1e5bbfb7ad2eeaabf7c1eeb404d7757c379bd1f7e5cce9d8bf425384"},
     {file = "sniffio-1.3.0.tar.gz", hash = "sha256:e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"},
+]
+
+[[package]]
+name = "termcolor"
+version = "2.3.0"
+requires_python = ">=3.7"
+summary = "ANSI color formatting for output in terminal"
+files = [
+    {file = "termcolor-2.3.0-py3-none-any.whl", hash = "sha256:3afb05607b89aed0ffe25202399ee0867ad4d3cb4180d98aaf8eefa6a5f7d475"},
+    {file = "termcolor-2.3.0.tar.gz", hash = "sha256:b5b08f68937f138fe92f6c089b99f1e2da0ae56c52b78bf7075fd95420fd9a5a"},
 ]
 
 [[package]]
