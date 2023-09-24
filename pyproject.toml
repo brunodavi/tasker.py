@@ -1,7 +1,7 @@
 [project]
 name = "tasker.py"
 version = "0.2.0"
-description = "Automatize seu android com python"
+description = "Ferramenta para criar automações no Android"
 authors = [
     {name = "Bruno Davi", email = "48166556+brunodavi@users.noreply.github.com"},
 ]
@@ -17,8 +17,8 @@ license = {text = "MIT"}
 
 
 [tool.pdm.scripts]
-test_all.cmd = "pytest -vv -s"
-test_all.env_file = ".env"
+test-all.cmd = "pytest -vv -s"
+test-all.env_file = ".env"
 
 test.cmd = "pytest -vv -s -k test_ -k 'not test_action'"
 test.env_file = ".env"
