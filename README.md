@@ -52,7 +52,7 @@ hello_world.play()
 hello_world.export()
 ```
 
-### Desenvolvimento
+### Como Contribuir
 Depois de instalar o projeto vá em [Projects][gh-projects]
 para ver as tarefas pendentes
 
