@@ -8,18 +8,18 @@ Ferramenta para criar automações no Android
 - Projeto TaskerPy no Tasker
 
 
+## Projeto TaskerPy Server
+Esse projeto faz a comunicação
+entre o Python e o Tasker
+
+Pode ser importado [nesse link][tasker-py]
+
 ## Inicio Rápido
 
 ### Instalação
 ```bash
 pip install tasker.py
 ```
-
-### Projeto TaskerPy Server
-Esse projeto faz a comunicação
-entre o Python e o Tasker
-
-Pode ser importado [nesse link][tasker-py]
 
 ### Demonstração
 
