@@ -9,6 +9,7 @@ class TaskCollision(int, Enum):
 
     O que fazer ao executar a mesma tarefas mais de uma vez
     """
+
     ABORT_NEW_TASK = 0
     ABORT_EXISTING_TASK = 1
     RUN_BOTH_TOGETHER = 2

@@ -10,6 +10,7 @@ class XmlUtils:
     """
     Responsavel por transformar os abstrações do Tasker em xml
     """
+
     def _create_data(self, *datas: E):
         return E.TaskerData(*datas, sr='', dvi='1')
 
@@ -23,6 +24,9 @@ class XmlUtils:
                 case Stream():
                     int_stream = int(value)
                     yield E.Int(**kwargs, val=str(int_stream))
+                case bool():
+                    int_bool = int(value)
+                    yield E.Int(**kwargs, val=str(int_bool))
                 case int():
                     yield E.Int(**kwargs, val=str(value))
                 case str():
