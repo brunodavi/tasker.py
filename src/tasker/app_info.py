@@ -11,6 +11,7 @@ class AppInfo(str, Enum):
         >>> AppInfo.PACKAGE
         'net.dinglisch.android.taskerm'
     """
+
     PACKAGE = 'net.dinglisch.android.taskerm' or Env().TASKER_PY_PACKAGE
 
     RESOURCE = f'android.resource://{PACKAGE}/drawable'

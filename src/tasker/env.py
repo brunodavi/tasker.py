@@ -13,6 +13,7 @@ class Env:
         >>> Env().TASKER_PY_PACKAGE == getenv('TASKER_PY_PACKAGE')
         True
     """
+
     TASKER_PY_PACKAGE: str = ''
     TASKER_PY_ADDRESS: str = ''
     TASKER_VERSION: str = ''

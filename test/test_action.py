@@ -1,11 +1,8 @@
 import pytest
 
-from tasker.actions.alert import (
-    Beep,
-    Flash,
-)
-
+from tasker.actions.alert import Beep, Flash
 from tasker.py import Task, TaskerPy
+
 
 @pytest.fixture
 def add_task_with_return():
@@ -13,10 +10,7 @@ def add_task_with_return():
 
     variables_returned = {'var': '%par1'}
 
-    return app.add_task(
-        'TPY - Run',
-        returned=variables_returned
-    )
+    return app.add_task('TPY - Run', returned=variables_returned)
 
 
 def test_beep(add_task_with_return):

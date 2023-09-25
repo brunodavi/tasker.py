@@ -10,6 +10,7 @@ class XmlUtils:
     """
     Responsavel por transformar os abstrações do Tasker em xml
     """
+
     def _create_data(self, *datas: E):
         return E.TaskerData(*datas, sr='', dvi='1')
 

@@ -8,6 +8,7 @@ class Stream(int, Enum):
     Examples:
         >>> Stream.ALARM
     """
+
     CALL = 0
     SYSTEM = 1
     RINGER = 2

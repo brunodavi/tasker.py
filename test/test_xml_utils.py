@@ -69,11 +69,7 @@ def test_beep_xml_creator():
 
 def test_flash_xml_creator():
     xml_utils = XmlUtils()
-    xml_task = xml_utils.create_task(
-        1,
-        'task_test',
-        Flash('text', long=True)
-    )
+    xml_task = xml_utils.create_task(1, 'task_test', Flash('text', long=True))
 
     xml_string = etree.tostring(xml_task)
 
