@@ -8,10 +8,10 @@ from .stream import Stream
 
 class XmlUtils:
     """
-    Responsavel por transformar os abstrações do Tasker em xml
+    Responsavel por transformar as abstrações do Tasker em xml
     """
 
-    def _create_data(self, *datas: E):
+    def _create_data(self, *datas):
         return E.TaskerData(*datas, sr='', dvi='1')
 
     def _action_to_args(self, action: Action):
@@ -43,13 +43,13 @@ class XmlUtils:
 
     def create_task(self, task_id: int, task_name: str, *actions: Action):
         """
-        Cria um elemento xml da biblioteca xml
+        Cria um elemento xml da biblioteca lxml
         representando uma tarefa do Tasker
 
         Parameters:
             task_id: Id da tarefa
             task_name: Nome da tarefa
-            actions: Qualquer dataclass que herde de action
+            actions: Qualquer dataclass que herde de action com _code_ definido
 
         Examples:
             >>> from tasker.actions.alert import Beep

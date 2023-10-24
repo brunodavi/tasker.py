@@ -1,24 +1,19 @@
-from dataclasses import asdict, dataclass
-from os import getenv
+from envclass import EnvClass
 
 
-@dataclass
-class Env:
+class Env(EnvClass):
     """
     Carrega as variáveis de ambiente esxistentes
-    no projeto
-
-    Examples:
-        >>> from os import getenv
-        >>> Env().TASKER_PY_PACKAGE == getenv('TASKER_PY_PACKAGE')
-        True
+    com informações do Tasker
     """
 
-    TASKER_PY_PACKAGE: str = ''
-    TASKER_PY_ADDRESS: str = ''
-    TASKER_VERSION: str = ''
+    _prefix = 'TASKER_PY'
+    _strict = False
 
-    def __post_init__(self):
-        for attr in asdict(self):
-            env_var = getenv(attr)
-            setattr(self, attr, env_var)
+    version: str
+    package: str = 'net.dinglisch.android.taskerm'
+
+    address: str = 'localhost'
+    port: int = 9170
+
+    timeout: int = 30

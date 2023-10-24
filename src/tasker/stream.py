@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 
 
-class Stream(int, Enum):
+class Stream(IntEnum):
     """
     Opção de saida de áudio do dispositivo
 

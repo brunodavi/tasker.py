@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 
 
-class TaskCollision(int, Enum):
+class TaskCollision(IntEnum):
     """
     Configuração do fluxo de colisões entre tarefas
 
