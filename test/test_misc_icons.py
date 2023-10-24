@@ -1,7 +1,7 @@
 from tasker.icons import Misc
 
 
-def test_icone_de_warning():
+def test_warning_icon():
     expected_warning = (
         'android.resource://'
         'net.dinglisch.android.taskerm'
