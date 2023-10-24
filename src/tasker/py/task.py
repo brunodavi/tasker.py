@@ -8,7 +8,8 @@ from lxml import etree
 from ..task_collision import TaskCollision
 from ..xml_utils import XmlUtils
 from .action import Action
-from .client import TaskerPyClient
+
+from httpx import Client
 
 LOCAL_TASKS = '/sdcard/Tasker/tasks/'
 
@@ -20,7 +21,7 @@ class Task:
 
     _actions: Callable[..., Generator[Action, None, None]]
     _returned: dict[str, str] | None
-    _client: TaskerPyClient
+    _client: Client
 
     priority: int = 100
     collision: TaskCollision = TaskCollision.ABORT_NEW_TASK
@@ -31,7 +32,7 @@ class Task:
     variables: dict[str, Any] = field(default_factory=dict)
 
     def __call__(self, *args, **kwargs):
-        for action in self._actions(self):
+        for action in self._actions():
             yield deepcopy(action)
 
     def to_string(self):

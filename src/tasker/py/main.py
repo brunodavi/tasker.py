@@ -1,21 +1,38 @@
 from dataclasses import dataclass
-from os import getenv
 from random import randint
 
-from .client import TaskerPyClient
 from .profile import Profile
 from .scene import Scene
 from .task import Task
 
+from tasker.env import Env
+
+from httpx import Client
+
+
+env = Env()
+
+TASKER_PY_ADDRESS = env.address
+TASKER_PY_PORT = env.port
+
+TASKER_PY_TIMEOUT = env.timeout
+
 
 @dataclass
 class TaskerPy:
-    address: str = getenv('TASKER_PY_ADDRESS') or 'localhost'
-    port: int = 9170
+    address: str = TASKER_PY_ADDRESS
+    port: int = TASKER_PY_PORT
+
+    timeout: int = TASKER_PY_TIMEOUT
+
+    @property
+    def client(self):
+        return Client(
+            base_url=f'http://{self.address}:{self.port}',
+            timeout=self.timeout,
+        )
 
     def __post_init__(self):
-        self._client = TaskerPyClient(self.address, self.port)
-
         self._profiles: list[Profile] = []
         self._tasks: list[Task] = []
         self._scenes: list[Scene] = []
@@ -47,7 +64,7 @@ class TaskerPy:
                 name or action_func.__name__,
                 action_func,
                 returned,
-                self._client,
+                self.client,
             )
 
             self._tasks.append(task)
