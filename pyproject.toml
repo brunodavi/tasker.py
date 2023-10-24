@@ -1,6 +1,6 @@
 [project]
 name = "tasker.py"
-version = "0.2.0"
+version = "0.1.0"
 description = "Ferramenta para criar automações no Android"
 authors = [
     {name = "Bruno Davi", email = "48166556+brunodavi@users.noreply.github.com"},
@@ -10,6 +10,7 @@ dependencies = [
     "httpx>=0.24.1",
     "cython>=3.0.0",
     "lxml>=4.9.3",
+    "envclass>=0.1.2",
 ]
 
 requires-python = ">=3.10"
@@ -17,10 +18,10 @@ license = {text = "MIT"}
 
 
 [tool.pdm.scripts]
-test-all.cmd = "pytest -vv -s"
-test-all.env_file = ".env"
+test-actions.cmd = "pytest -vv -s test/actions"
+test-actions.env_file = '.env'
 
-test.cmd = "pytest -vv -s -k test_ -k 'not test_action'"
+test.cmd = "pytest -vv -s -k 'not test/action'"
 test.env_file = ".env"
 
 lint.shell = "blue --check --diff . && isort --check --diff ."
@@ -43,6 +44,9 @@ docs = [
     "mkdocstrings-python>=1.6.2",
     "mkdocs-macros-plugin>=1.0.4",
     "jinja2>=3.1.2",
+]
+debug = [
+    "ipdb>=0.13.13",
 ]
 
 [tool.isort]
