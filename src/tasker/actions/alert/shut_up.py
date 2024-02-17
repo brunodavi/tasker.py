@@ -4,7 +4,5 @@ from tasker.py import Action
 
 
 @dataclass
-class NotifyCancel(Action):
-    _code_ = 779
-
-    title: str = ''
+class ShutUp(Action):
+    _code_ = 697

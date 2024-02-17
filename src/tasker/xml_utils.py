@@ -2,8 +2,9 @@ from dataclasses import astuple
 
 from lxml.builder import E
 
+from .icons import Icon, NoneIcon
 from .py.action import Action
-from .stream import Stream
+from tasker.types import Stream
 
 
 class XmlUtils:
@@ -21,9 +22,23 @@ class XmlUtils:
             kwargs = {'sr': f'arg{index}'}
 
             match value:
+                case '':
+                    yield E.Str(**kwargs)
+                case None:
+                    yield E.Int(**kwargs)
+                case NoneIcon():
+                    yield E.Img(**kwargs)
+
                 case Stream():
                     int_stream = int(value)
                     yield E.Int(**kwargs, val=str(int_stream))
+                case Icon():
+                    yield E.Img(
+                            E.nme(value.name),
+                            E.tint(value.color),
+                            **kwargs,
+                        )
+
                 case bool():
                     int_bool = int(value)
                     yield E.Int(**kwargs, val=str(int_bool))

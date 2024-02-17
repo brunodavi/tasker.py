@@ -1,10 +1,10 @@
-from tasker.actions.alert import Beep
+from tasker.actions.alert import Notify
 
 
-def test_beep_not_error(add_task_with_return):
+def test_notify_not_error(add_task_with_return):
     @add_task_with_return
     def task():
-        yield Beep(1000, duration=100)
+        yield Notify('title')
 
     task.par1 = 'test_returned'
     variables = task.play()

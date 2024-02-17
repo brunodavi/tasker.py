@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from tasker import Stream
+from tasker.types import Stream
 from tasker.py import Action
 
 

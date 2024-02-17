@@ -4,7 +4,6 @@ from tasker.py import Action
 
 
 @dataclass
-class NotifyCancel(Action):
-    _code_ = 779
-
-    title: str = ''
+class Vibrate(Action):
+    _code_ = 61
+    time: int = 200

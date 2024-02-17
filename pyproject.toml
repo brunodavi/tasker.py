@@ -18,11 +18,11 @@ license = {text = "MIT"}
 
 
 [tool.pdm.scripts]
-test-actions.cmd = "pytest -vv -s test/actions"
-test-actions.env_file = '.env'
-
-test.cmd = "pytest -vv -s -k 'not test/action'"
+test.cmd = "pytest -vv -s"
 test.env_file = ".env"
+
+test-act = "pdm test test/action"
+test-no-act = "pdm test -k 'not test/action'"
 
 lint.shell = "blue --check --diff . && isort --check --diff ."
 format.shell = "blue . && isort ."
