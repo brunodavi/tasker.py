@@ -16,9 +16,8 @@ class XmlUtils:
         return E.TaskerData(*datas, sr='', dvi='1')
 
     def _action_to_args(self, action: Action):
-        action_args = astuple(action)
-
-        for index, value in enumerate(action_args):
+        for index, key in enumerate(action.__match_args__):
+            value = getattr(action, key)
             kwargs = {'sr': f'arg{index}'}
 
             match value:
@@ -31,11 +30,14 @@ class XmlUtils:
 
                 case Stream():
                     int_stream = int(value)
-                    yield E.Int(**kwargs, val=str(int_stream))
+                    yield E.Int(
+                            **kwargs,
+                            val=str(int_stream),
+                        )
                 case Icon():
                     yield E.Img(
                             E.nme(value.name),
-                            E.tint(value.color),
+                            E.tint(str(value.color)),
                             **kwargs,
                         )
 

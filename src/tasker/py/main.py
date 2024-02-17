@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from random import randint
+from time import time
 
 from .profile import Profile
 from .scene import Scene
@@ -10,20 +10,12 @@ from tasker.env import Env
 from httpx import Client
 
 
-env = Env()
-
-TASKER_PY_ADDRESS = env.address
-TASKER_PY_PORT = env.port
-
-TASKER_PY_TIMEOUT = env.timeout
-
-
 @dataclass
 class TaskerPy:
-    address: str = TASKER_PY_ADDRESS
-    port: int = TASKER_PY_PORT
+    address: str = Env.address
+    port: int = Env.port
 
-    timeout: int = TASKER_PY_TIMEOUT
+    timeout: int = Env.timeout
 
     @property
     def client(self):
@@ -37,18 +29,6 @@ class TaskerPy:
         self._tasks: list[Task] = []
         self._scenes: list[Scene] = []
 
-    def _generate_id(
-        self,
-        items: list[Profile] | list[Task] | list[Scene],
-        randint_args=[1_000, 100_000],
-    ) -> int:
-        new_id = randint(*randint_args)
-
-        if any((new_id == item.id for item in items)):
-            return self._generate_id(items, randint_args)
-
-        return new_id
-
     def add_task(
         self,
         name: str | None = None,
@@ -56,7 +36,7 @@ class TaskerPy:
         returned: dict[str, str] | None = None,
     ):
         if task_id is None:
-            task_id = self._generate_id(self._tasks)
+            task_id = int(time())
 
         def decorator(action_func):
             task = Task(
