@@ -92,7 +92,7 @@ Usando essa variável `TASKER_PY_ADDRESS` que armazena
 o IP do seu aparelho
 
 #### Exemplo
-```bash
+```env
 TASKER_PY_ADDRESS=192.168.1.25
 ```
 
