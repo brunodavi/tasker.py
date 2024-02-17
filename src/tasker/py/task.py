@@ -40,7 +40,7 @@ class Task:
 
         xml_task = xml_utils.create_task(self.id, self.name, *self())
 
-        return etree.tostring(xml_task).decode()
+        return etree.tostring(xml_task, pretty_print=True).decode()
 
     def export(self, directory: str | Path = LOCAL_TASKS):
         filepath = Path(directory) / f'{self.name}.tsk.xml'

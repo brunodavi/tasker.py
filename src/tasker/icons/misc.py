@@ -1,55 +1,58 @@
 from dataclasses import dataclass
 
 from .icon import Icon
+from tasker.utils import meta_attr
 
+@meta_attr
+def meta_icon(value):
+    return Icon(value)
 
-@dataclass
-class Misc(Icon):
-    HUE: str = 'cust_ambilwarna_hue'
+class Misc(Icon, metaclass=meta_icon):
+    HUE = 'cust_ambilwarna_hue'
 
-    BEAR: str = 'cust_animal_bear'
-    BUG: str = 'cust_animal_bug'
-    FOX: str = 'cust_animal_fox'
-    HIPPO: str = 'cust_animal_hippo'
-    PANDA: str = 'cust_animal_panda'
-    PENGUIN: str = 'cust_animal_penguin'
+    BEAR = 'cust_animal_bear'
+    BUG = 'cust_animal_bug'
+    FOX = 'cust_animal_fox'
+    HIPPO = 'cust_animal_hippo'
+    PANDA = 'cust_animal_panda'
+    PENGUIN = 'cust_animal_penguin'
 
-    TASKER: str = 'cust_app_icon'
+    TASKER = 'cust_app_icon'
 
-    EDIT: str = 'cust_appshort_edit'
-    LOG: str = 'cust_appshort_log'
-    SETTING: str = 'cust_appshort_settings'
+    EDIT = 'cust_appshort_edit'
+    LOG = 'cust_appshort_log'
+    SETTING = 'cust_appshort_settings'
 
-    BATTERY: str = 'cust_battery'
-    CHARGING: str = 'cust_charging'
+    BATTERY = 'cust_battery'
+    CHARGING = 'cust_charging'
 
-    TASKER_BLACK: str = 'cust_bolt_black'
-    TASKER_WHITE: str = 'cust_bolt_white'
+    TASKER_BLACK = 'cust_bolt_black'
+    TASKER_WHITE = 'cust_bolt_white'
 
-    HOLO_DARK: str = 'cust_button_holo_dark'
+    HOLO_DARK = 'cust_button_holo_dark'
 
-    SEARCH: str = 'cust_choose_blue'
-    COFFEE: str = 'cust_coffee'
-    COOKIE: str = 'cust_cookie'
-    EMAIL: str = 'cust_email'
-    FLAG: str = 'cust_flag'
+    SEARCH = 'cust_choose_blue'
+    COFFEE = 'cust_coffee'
+    COOKIE = 'cust_cookie'
+    EMAIL = 'cust_email'
+    FLAG = 'cust_flag'
 
-    DONUT: str = 'cust_icon_donut'
-    GINGERBREAD: str = 'cust_icon_gingerbread'
+    DONUT = 'cust_icon_donut'
+    GINGERBREAD = 'cust_icon_gingerbread'
 
-    LOCK: str = 'cust_lock'
+    LOCK = 'cust_lock'
 
-    PANEL_HOLO_DARK: str = 'cust_menu_dropdown_panel_holo_dark'
-    PANEL_HOLO_LIGHT: str = 'cust_menu_dropdown_panel_holo_light'
+    PANEL_HOLO_DARK = 'cust_menu_dropdown_panel_holo_dark'
+    PANEL_HOLO_LIGHT = 'cust_menu_dropdown_panel_holo_light'
 
-    PROFILE_ENTER_DARK: str = 'cust_profile_enter_dark'
-    PROFILE_ENTER_LIGHT: str = 'cust_profile_enter_light'
-    PROFILE_EXIT_DARK: str = 'cust_profile_exit_dark'
-    PROFILE_EXIT_LIGHT: str = 'cust_profile_exit_light'
+    PROFILE_ENTER_DARK = 'cust_profile_enter_dark'
+    PROFILE_ENTER_LIGHT = 'cust_profile_enter_light'
+    PROFILE_EXIT_DARK = 'cust_profile_exit_dark'
+    PROFILE_EXIT_LIGHT = 'cust_profile_exit_light'
 
-    SATELLITE: str = 'cust_satellite'
-    SCRUBBER_NORMAL: str = 'cust_scrubber_normal'
-    STAR: str = 'cust_star'
-    USB: str = 'cust_usb'
-    WARNING: str = 'cust_warning'
-    ZIP: str = 'cust_zip'
+    SATELLITE = 'cust_satellite'
+    SCRUBBER_NORMAL = 'cust_scrubber_normal'
+    STAR = 'cust_star'
+    USB = 'cust_usb'
+    WARNING = 'cust_warning'
+    ZIP = 'cust_zip'

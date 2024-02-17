@@ -1,16 +1,23 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from tasker.py import Action
+from tasker.icons import Icon, NoneIcon
+from tasker.types.notify_led import NotifyLed
 
 
 @dataclass
 class Notify(Action):
+    _code_ = 523
+
     title: str
-    text: str = None
-    icon: str = None
+    text: str = ''
+    icon: Icon | NoneIcon = NoneIcon()
+    number: int = 0
     permanent: bool = False
     priority: int = 3
     repeat_alert: bool = False
-    sound_file: str = None
-    vibration_pattern: str = None
-    category: str = None
+    led_colour: NotifyLed = NotifyLed.Red
+    led_rate: int = 0
+    sound_file: str = ''
+    vibration_pattern: str = ''
+    category: str = ''
