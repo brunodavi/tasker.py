@@ -6,7 +6,7 @@ groups = ["default", "test", "linter", "docs", "debug"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:5b0740a27d9b0b5a6cdfd8f7b5884e64a7bd6d8ee825e2f60422e151efcfbdd3"
+content_hash = "sha256:30f1f8d260dfc13e78e7672e9eb1c8e9d8de12bb20c5818c37a34ffb3221a410"
 
 [[package]]
 name = "anyio"
@@ -217,12 +217,12 @@ files = [
 
 [[package]]
 name = "envclass"
-version = "0.1.2"
+version = "1.1.0"
 requires_python = ">=3.7"
-summary = "A Python class that simplifies the management of environment variables in your applications, eliminating the need for code repetition."
+summary = "Manage environment variables in a simple and elegant way"
 files = [
-    {file = "envclass-0.1.2-py3-none-any.whl", hash = "sha256:2e375f39766d28f37088fcabfdbd16a1b925f1339dbaa256ff2181d82600673f"},
-    {file = "envclass-0.1.2.tar.gz", hash = "sha256:6d73ea35ccfa1f5f910156cc66f37cfd6276d9ebe7a308a03d6d58f30b4b3512"},
+    {file = "envclass-1.1.0-py3-none-any.whl", hash = "sha256:e9750a789c1635e85b1077ca7d89c84cf5fccd1eb316921fa9a0038394bea8d4"},
+    {file = "envclass-1.1.0.tar.gz", hash = "sha256:bc4b66b31b5aac0cc9b760936c03809dd7e73aae0f7766ca31e03d6d8bbcc29d"},
 ]
 
 [[package]]
