@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from time import time
+from hashlib import md5
 
 from .profile import Profile
 from .scene import Scene
@@ -29,15 +29,16 @@ class TaskerPy:
         self._tasks: list[Task] = []
         self._scenes: list[Scene] = []
 
+    def _generate_id(self, name):
+        hash_md5 = md5(name.encode()).hexdigest()
+        return int(hash_md5[:7], 16)
+
     def add_task(
         self,
         name: str | None = None,
         task_id: int | None = None,
         returned: dict[str, str] | None = None,
     ):
-        if task_id is None:
-            task_id = int(time())
-
         def decorator(action_func):
             task = Task(
                 task_id,
@@ -46,6 +47,12 @@ class TaskerPy:
                 returned,
                 self.client,
             )
+
+            if task.id is None:
+                task.id = self._generate_id(task.name)
+
+            if not (0 < task.id < 1_000_000_000):
+                raise ValueError('Task id invalid min: 0 max: 999_999_999')
 
             self._tasks.append(task)
             return task
