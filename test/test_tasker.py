@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from pytest import fixture
+from pytest import fixture, raises
 
 from tasker.py import Action, Task, TaskerPy
 
@@ -59,25 +59,26 @@ def test_task_with_name(task_with_name: Task):
     assert task_with_name.name == 'Task Name'
 
 
-def task_actions_in_task(task_no_name: Task, actions):
+def task_actions_in_task(
+    task_no_name: Task,
+    task_with_name: Task,
+    actions
+):
     assert [*task_no_name()] == actions
+    assert [*task_with_name()] == reversed(actions) 
 
 
-def test_id_generator(app: TaskerPy):
-    @dataclass
-    class Item:
-        id: int
+def test_id_limit(app: TaskerPy):
+    @app.add_task(task_id=int('9' * 9))
+    def task1(): ...
 
-    items = [
-        Item(1),
-        Item(2),
-        Item(3),
-    ]
+    with raises(ValueError):
+        @app.add_task(task_id=int( '-' + ('9' * 9)))
+        def task2(): ...
 
-    randint_args = [1, 5]
-
-    assert app._generate_id(items, randint_args) in (4, 5)
-    assert app._generate_id(items, randint_args) in (4, 5)
+    with raises(ValueError):
+        @app.add_task(task_id=int('9' * 10))
+        def task3(): ...
 
 
 def test_iter_task(task_no_name: Task, actions):
