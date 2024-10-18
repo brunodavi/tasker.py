@@ -12,7 +12,7 @@ Ferramenta para criar automações no Android
 
 ### Instalação
 ```bash
-pip install tasker.py
+pip install git+https://github.com/brunodavi/tasker.py
 ```
 
 ### Demonstração
