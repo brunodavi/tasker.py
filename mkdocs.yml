@@ -5,7 +5,7 @@ edit_uri: tree/main/docs
 
 theme:
   name: material
-  language: pt-BR
+  language: en
   logo: assets/logo.png
   favicon: assets/logo.png
 
@@ -13,6 +13,9 @@ markdown_extensions:
   - attr_list
   - admonition
   - pymdownx.tasklist
+
+  - pymdownx.highlight
+  - pymdownx.superfences
 
 extra_css:
   - styles/extra.css
@@ -26,7 +29,9 @@ plugins:
     handlers:
       python:
         paths: [src/tasker]
+        options:
+          show_submodules: true
 
 extra:
   commands:
-    install: pip install tasker.py
+    install: pip install git+https://github.com/brunodavi/tasker.py

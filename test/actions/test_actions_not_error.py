@@ -70,3 +70,15 @@ def test_variables_actions(add_task_with_return, variables_action: Action):
 
     assert isinstance(variables, dict)
     assert variables['var'] == 'test_returned'
+
+
+def test_variables_set_global_return(app):
+    @app.add_task(
+        name='My Task',
+        task_id=12330,
+        output_variables={'var_python': '%VarTasker'},
+    )
+    def my_task():
+        yield VariableSet('%VarTasker', 'Hello, World!')
+
+    assert my_task.play() == {'var_python': 'Hello, World!'}
