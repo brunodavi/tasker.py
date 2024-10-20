@@ -17,7 +17,7 @@ def add_task_with_return():
 
     variables_returned = {'var': '%par1'}
 
-    return app.add_task('TPY - Run', returned=variables_returned)
+    return app.add_task('TPY - Run', output_variables=variables_returned)
 
 
 @fixture
