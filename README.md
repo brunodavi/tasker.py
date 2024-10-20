@@ -18,7 +18,7 @@ pip install git+https://github.com/brunodavi/tasker.py
 
 ## Usage Example
 
-Here’s a simple demonstration of how to create an automation with **TaskerPy**:
+Here’s a simple demonstration of how to create an automation with **TaskerPy** from **Android**:
 
 ```python
 from tasker.py import TaskerPy, Task
@@ -34,7 +34,7 @@ def hello_world():
     yield Beep(frequency=9_000, duration=100)
     yield Beep(frequency=10_000, duration=100)
 
-# Play and export the task
+# Imports the task and executes it
 hello_world.play()
 hello_world.export()  # Exports as XML to /sdcard/Tasker/tasks/Show_Popup.tsk.xml
 ```
