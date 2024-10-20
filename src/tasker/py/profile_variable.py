@@ -8,7 +8,7 @@ class ProfileVariable:
     config_on_imported: bool = False
     structure_variable: bool = False
     immutable: bool = False
-    
+
     variable_name: str = '%aaa'
     value: str = ''
     display: str = ''

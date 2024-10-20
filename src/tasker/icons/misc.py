@@ -1,11 +1,14 @@
 from dataclasses import dataclass
 
-from .icon import Icon
 from tasker.utils import meta_attr
+
+from .icon import Icon
+
 
 @meta_attr
 def meta_icon(value):
     return Icon(value)
+
 
 class Misc(Icon, metaclass=meta_icon):
     HUE = 'cust_ambilwarna_hue'

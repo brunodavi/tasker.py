@@ -8,7 +8,7 @@ class SayToFile(Action):
     _code_ = 699
 
     text: str
-    engine: str = "default:default"
+    engine: str = 'default:default'
     filename: str = ''
     pitch: int = 5
     speed: int = 5

@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+
 class NotifyLed(IntEnum):
     Red = 0
     Green = 1

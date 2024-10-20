@@ -1,2 +1,2 @@
-class NoneIcon():
+class NoneIcon:
     ...

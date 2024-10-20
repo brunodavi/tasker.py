@@ -1,5 +1,5 @@
-from tasker.icons.icon import Icon
 from tasker.icons import Misc
+from tasker.icons.icon import Icon
 
 
 def test_warning_icon():

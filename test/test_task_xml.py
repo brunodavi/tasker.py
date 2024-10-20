@@ -1,15 +1,14 @@
+from lxml import etree
 from pytest import fixture
 
-from lxml import etree
-
-from tasker.xml import  TaskerXml
 from tasker.py.profile_variable import ProfileVariable
+from tasker.xml import TaskerXml
 
 
 def xml_to_string(element_xml):
     etree.tostring(element_xml, pretty_print=True, encoding='utf-8').decode()
 
-    
+
 def read_xml(path):
     parser = etree.XMLParser(remove_blank_text=True)
     mock_tree = etree.parse(path, parser)
@@ -48,8 +47,8 @@ def test_task_profile_variable(flash_task):
             display='Value',
             prompt='Message',
             same_value=False,
-            exported_value='-1'
-        )
+            exported_value='-1',
+        ),
     ]
 
     task_xml = TaskerXml(tasks=[flash_task]).to_xml()

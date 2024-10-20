@@ -1,7 +1,6 @@
-from tasker.py.profile_variable import ProfileVariable
-from tasker.py.action import Action
-
 from tasker.icons import Icon, NoneIcon
+from tasker.py.action import Action
+from tasker.py.profile_variable import ProfileVariable
 from tasker.types import Stream
 
 from .xml_builder import XmlBuilder
@@ -29,15 +28,15 @@ class TaskXml(XmlBuilder):
                 case Stream():
                     int_stream = int(value)
                     yield E.Int(
-                            **kwargs,
-                            val=str(int_stream),
-                        )
+                        **kwargs,
+                        val=str(int_stream),
+                    )
                 case Icon():
                     yield E.Img(
-                            E.nme(value.name),
-                            E.tint(str(value.color)),
-                            **kwargs,
-                        )
+                        E.nme(value.name),
+                        E.tint(str(value.color)),
+                        **kwargs,
+                    )
 
                 case bool():
                     int_bool = int(value)
@@ -80,13 +79,12 @@ class TaskXml(XmlBuilder):
                 E.pvt(variable.config_type),
                 E.pvv(variable.value),
                 E.strout(structure_variable),
-
                 sr=f'pv{index}',
             )
 
     def to_xml(self):
         E = self.E
-    
+
         task_collision = int(self.task.collision)
         notify = str(self.task.notify).lower()
         awake = str(self.task.awake).lower()
@@ -96,21 +94,18 @@ class TaskXml(XmlBuilder):
 
         if self.task.icon is not None:
             icon.push(self.task.icon)
-    
+
         return E.Task(
-                E.cdate('0'),
-                E.edate('1'),
-                E.id(f'{self.task.id}'),
-                E.nme(self.task.name),
-                E.pri(f'{self.task.priority}'),
-                E.rty(f'{task_collision}'),
-                E.showinnot(notify),
-                E.stayawake(awake),
-                
-                *self._actions_to_xml(*self.task()),
-
-                *icon,
-                *self._profile_variables_to_xml(*profile_variables),
-
-                sr='task',
-            )
+            E.cdate('0'),
+            E.edate('1'),
+            E.id(f'{self.task.id}'),
+            E.nme(self.task.name),
+            E.pri(f'{self.task.priority}'),
+            E.rty(f'{task_collision}'),
+            E.showinnot(notify),
+            E.stayawake(awake),
+            *self._actions_to_xml(*self.task()),
+            *icon,
+            *self._profile_variables_to_xml(*profile_variables),
+            sr='task',
+        )
