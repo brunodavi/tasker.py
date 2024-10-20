@@ -103,6 +103,17 @@ def test_export_task(tmp_path: Path, task_no_name: Task):
     assert '<nme>task</nme>' in xml_string
 
 
+def test_export_file_task(tmp_path: Path, task_no_name: Task):
+    tmp_path /= 'task.xml'
+    tmp_task_exported = task_no_name.export(tmp_path)
+    xml_string = tmp_task_exported.read_text()
+
+    assert tmp_task_exported.exists()
+    assert tmp_path == tmp_task_exported
+
+    assert '<nme>task</nme>' in xml_string
+
+
 def test_stores_tasks(app: TaskerPy):
     @app.add_task()
     def task1(): ...
