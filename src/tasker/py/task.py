@@ -3,16 +3,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Generator
 
+from httpx import Client
 from lxml import etree
-
-from tasker.task_collision import TaskCollision
 
 from tasker.icons.icon import Icon
 from tasker.py.action import Action
 from tasker.py.profile_variable import ProfileVariable
+from tasker.task_collision import TaskCollision
 from tasker.xml.tasker_xml import TaskerXml
-
-from httpx import Client
 
 
 @dataclass
@@ -32,7 +30,6 @@ class Task:
 
     profile_variables: list[ProfileVariable] = field(default_factory=list)
 
-    
     par1: Any = None
     par2: Any = None
 

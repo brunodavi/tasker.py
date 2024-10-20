@@ -1,13 +1,12 @@
-from .project_xml import ProjectXml
 from .profile_xml import ProfileXml
-from .task_xml import TaskXml
+from .project_xml import ProjectXml
 from .scene_xml import SceneXml
-
+from .task_xml import TaskXml
 from .xml_builder import XmlBuilder
 
 
 class TaskerXml(XmlBuilder):
-    def __init__(self, projects = [], profiles = [], tasks = [], scenes = []):
+    def __init__(self, projects=[], profiles=[], tasks=[], scenes=[]):
         self.projects = projects
         self.profiles = profiles
         self.tasks = tasks
@@ -19,13 +18,13 @@ class TaskerXml(XmlBuilder):
             *self.elements_to_xml(self.projects),
             *self.elements_to_xml(self.tasks),
             *self.elements_to_xml(self.scenes),
-
             sr='',
             dvi='1'
         )
 
     def elements_to_xml(self, elements: list):
-        if len(elements) == 0: return []
+        if len(elements) == 0:
+            return []
 
         first_element = elements[0]
 
@@ -41,4 +40,4 @@ class TaskerXml(XmlBuilder):
         xml_parser = xml_parsers[class_name]
 
         for element in elements:
-             yield xml_parser(element).to_xml()
+            yield xml_parser(element).to_xml()

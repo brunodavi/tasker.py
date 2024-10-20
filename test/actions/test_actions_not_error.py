@@ -1,22 +1,21 @@
 from pathlib import Path
-from pytest import fixture, FixtureRequest
+
+from pytest import FixtureRequest, fixture
 
 from tasker.actions.alert import (
     Beep,
-    Notify,
-    VibratePattern,
-    Vibrate,
-    Torch,
-    ShutUp,
-    SayToFile,
-    Say,
     Flash,
     Morse,
+    Notify,
     NotifyCancel,
+    Say,
+    SayToFile,
+    ShutUp,
+    Torch,
+    Vibrate,
+    VibratePattern,
 )
-
 from tasker.actions.variables import VariableSet
-
 from tasker.py import Action
 
 

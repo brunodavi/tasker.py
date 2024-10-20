@@ -59,26 +59,27 @@ def test_task_with_name(task_with_name: Task):
     assert task_with_name.name == 'Task Name'
 
 
-def task_actions_in_task(
-    task_no_name: Task,
-    task_with_name: Task,
-    actions
-):
+def task_actions_in_task(task_no_name: Task, task_with_name: Task, actions):
     assert [*task_no_name()] == actions
-    assert [*task_with_name()] == reversed(actions) 
+    assert [*task_with_name()] == reversed(actions)
 
 
 def test_id_limit(app: TaskerPy):
     @app.add_task(task_id=int('9' * 9))
-    def task1(): ...
+    def task1():
+        ...
 
     with raises(ValueError):
-        @app.add_task(task_id=int( '-' + ('9' * 9)))
-        def task2(): ...
+
+        @app.add_task(task_id=int('-' + ('9' * 9)))
+        def task2():
+            ...
 
     with raises(ValueError):
+
         @app.add_task(task_id=int('9' * 10))
-        def task3(): ...
+        def task3():
+            ...
 
 
 def test_iter_task(task_no_name: Task, actions):
@@ -116,13 +117,16 @@ def test_export_file_task(tmp_path: Path, task_no_name: Task):
 
 def test_stores_tasks(app: TaskerPy):
     @app.add_task()
-    def task1(): ...
+    def task1():
+        ...
 
     @app.add_task()
-    def task2(): ...
+    def task2():
+        ...
 
     @app.add_task()
-    def task3(): ...
+    def task3():
+        ...
 
     assert app._tasks == [
         task1,

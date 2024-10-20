@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
-from tasker.py import Action
 from tasker.icons import Icon, NoneIcon
+from tasker.py import Action
 from tasker.types.notify_led import NotifyLed
 
 

@@ -1,9 +1,9 @@
 from os import getenv
 
-from pytest import Function, mark, fixture
+from pytest import Function, fixture, mark
 
+from tasker.actions.alert import Beep, Flash
 from tasker.py import TaskerPy
-from tasker.actions.alert import Flash, Beep
 
 
 @fixture
