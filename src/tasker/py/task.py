@@ -19,7 +19,7 @@ class Task:
     name: str
 
     _actions: Callable[..., Generator[Action, None, None]]
-    _returned: dict[str, str] | None
+    _output_variables: dict[str, str] | None
     _client: Client
 
     priority: int = 100
@@ -63,7 +63,7 @@ class Task:
             'response_schema': {
                 'status_code': 200,
                 'headers': 'host:tasker.py',
-                'body': self._returned,
+                'body': self._output_variables,
             },
         }
 

@@ -6,30 +6,58 @@ from httpx import Client
 from tasker.env import Env
 
 from .profile import Profile
+from .project import Project
 from .scene import Scene
 from .task import Task
 
 
 @dataclass
 class TaskerPy:
+    """
+    Represents the main interface for TaskerPy, managing connection settings, projects, profiles, tasks and scenes.
+
+    Attributes:
+        address (str): The IP address of the Tasker server. Default is taken from environment variables.
+        port (int): The port number used for the Tasker server. Default is from environment variables.
+        timeout (int): The request timeout value in seconds. Default is from environment variables.
+    """
+
     address: str = Env.address
     port: int = Env.port
-
     timeout: int = Env.timeout
 
     @property
     def client(self):
+        """
+        Creates a new HTTP client for communicating with the Tasker server.
+
+        Returns:
+            Client (Client): An HTTP client configured with the Tasker server's base URL and timeout settings.
+        """
         return Client(
             base_url=f'http://{self.address}:{self.port}',
             timeout=self.timeout,
         )
 
     def __post_init__(self):
+        """
+        Initializes internal storage for projects, profiles, tasks, and scenes after the class is instantiated.
+        """
+        self._projects: list[Project] = []
         self._profiles: list[Profile] = []
         self._tasks: list[Task] = []
         self._scenes: list[Scene] = []
 
-    def _generate_id(self, name):
+    def _generate_id(self, name: str) -> int:
+        """
+        Generates a unique task ID using the MD5 hash of the task name.
+
+        Args:
+            name (str): The name of the task for which to generate an ID.
+
+        Returns:
+            int: A unique task ID derived from the hash of the task name.
+        """
         hash_md5 = md5(name.encode()).hexdigest()
         return int(hash_md5[:7], 16)
 
@@ -37,14 +65,42 @@ class TaskerPy:
         self,
         name: str | None = None,
         task_id: int | None = None,
-        returned: dict[str, str] | None = None,
+        output_variables: dict[str, str] | None = None,
     ):
+        """
+        Decorator to add a task to the TaskerPy application.
+
+        Args:
+            name (str, optional): The name of the task. If not provided, defaults to the function name.
+            task_id (int, optional): A specific task ID. If not provided, a unique ID will be generated.
+            output_variables (dict[str, str], optional): A dictionary mapping Python variable names to Tasker variable names.
+
+        Examples:
+            >>> from tasker.py import TaskerPy
+            >>> from tasker.actions.variables import VariableSet
+            >>>
+            >>> app = TaskerPy()
+            >>>
+            >>> @app.add_task(name='My Task', task_id=12300, output_variables={'var_python': '%VarTasker'})
+            ... def my_task():
+            ...     yield VariableSet('%VarTasker', 'Hello, World!')
+            >>>
+            >>> my_task.play()
+            >>> {'var_python': 'Hello, World!'}
+
+        Returns:
+            Task (Task): Wrapped with the TaskerPy.
+
+        Raises:
+            ValueError: If the task ID is invalid (must be between 1 and 999,999,999).
+        """
+
         def decorator(action_func):
             task = Task(
                 task_id,
                 name or action_func.__name__,
                 action_func,
-                returned,
+                output_variables,
                 self.client,
             )
 
