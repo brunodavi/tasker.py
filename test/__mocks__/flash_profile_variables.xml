@@ -1,0 +1,59 @@
+<TaskerData sr="" dvi="1">
+  <Task sr="task">
+    <cdate>0</cdate>
+    <edate>1</edate>
+    <id>206712218</id>
+    <nme>task_flash</nme>
+    <pri>100</pri>
+    <rty>0</rty>
+    <showinnot>false</showinnot>
+    <stayawake>false</stayawake>
+    <Action sr="act0" ve="7">
+      <code>548</code>
+      <Str sr="arg0" val="Hello, World" ve="3"/>
+      <Int sr="arg1" val="0"/>
+      <Int sr="arg2" val="0"/>
+      <Str sr="arg3"/>
+      <Str sr="arg4"/>
+      <Str sr="arg5"/>
+      <Str sr="arg6"/>
+      <Str sr="arg7"/>
+      <Str sr="arg8"/>
+      <Int sr="arg9" val="1"/>
+      <Str sr="arg10"/>
+      <Int sr="arg11" val="1"/>
+      <Int sr="arg12" val="0"/>
+      <Str sr="arg13"/>
+      <Int sr="arg14" val="0"/>
+      <Str sr="arg15"/>
+    </Action>
+    <ProfileVariable sr="pv0">
+      <clearout>true</clearout>
+      <exportval></exportval>
+      <immutable>false</immutable>
+      <pvci>false</pvci>
+      <pvd></pvd>
+      <pvdn></pvdn>
+      <pvid>206712218</pvid>
+      <pvit>t</pvit>
+      <pvn>%test_variable</pvn>
+      <pvt>t</pvt>
+      <pvv>TEST_VALUE</pvv>
+      <strout>false</strout>
+    </ProfileVariable>
+    <ProfileVariable sr="pv1">
+      <clearout>false</clearout>
+      <exportval>-1</exportval>
+      <immutable>true</immutable>
+      <pvci>true</pvci>
+      <pvd>Message</pvd>
+      <pvdn>Value</pvdn>
+      <pvid>206712218</pvid>
+      <pvit>t</pvit>
+      <pvn>%foo</pvn>
+      <pvt>n</pvt>
+      <pvv>30</pvv>
+      <strout>true</strout>
+    </ProfileVariable>
+  </Task>
+</TaskerData>

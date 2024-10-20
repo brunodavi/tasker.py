@@ -35,6 +35,7 @@ linter = [
     "blue>=0.9.1",
     "isort>=5.12.0",
 ]
+
 docs = [
     "mkdocs-material>=9.2.8",
     "mkdocstrings>=0.23.0",
@@ -42,6 +43,7 @@ docs = [
     "mkdocs-macros-plugin>=1.0.4",
     "jinja2>=3.1.2",
 ]
+
 debug = [
     "ipdb>=0.13.13",
 ]

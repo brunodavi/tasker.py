@@ -15,6 +15,8 @@ from tasker.actions.alert import (
     NotifyCancel,
 )
 
+from tasker.actions.variables import VariableSet
+
 from tasker.py import Action
 
 
@@ -38,10 +40,31 @@ def alert_action(request: FixtureRequest):
     Path('audio.wav').unlink(missing_ok=True)
 
 
+@fixture(
+    params=[
+        VariableSet('%var', 'value'),
+    ]
+)
+def variables_action(request: FixtureRequest):
+    yield request.param
+
+
 def test_alert_actions(add_task_with_return, alert_action: Action):
     @add_task_with_return
     def task():
         yield alert_action
+
+    task.par1 = 'test_returned'
+    variables = task.play()
+
+    assert isinstance(variables, dict)
+    assert variables['var'] == 'test_returned'
+
+
+def test_variables_actions(add_task_with_return, variables_action: Action):
+    @add_task_with_return
+    def task():
+        yield variables_action
 
     task.par1 = 'test_returned'
     variables = task.play()
