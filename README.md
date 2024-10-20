@@ -16,7 +16,7 @@ Install directly from GitHub:
 pip install git+https://github.com/brunodavi/tasker.py
 ```
 
-## Usage Example
+### Usage Example
 
 Here’s a simple demonstration of how to create an automation with **TaskerPy** from **Android**:
 
