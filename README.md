@@ -58,6 +58,10 @@ eval $(pdm venv activate)
 Invoke-Expression (pdm venv activate)
 ```
 
+#### Requirement to lxml
+Need `libxml2` and `libxslt`
+
+
 ### Available Scripts
 
 The scripts defined in the `pyproject.toml` include:
