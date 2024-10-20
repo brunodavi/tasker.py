@@ -1,17 +1,18 @@
-from copy import deepcopy
+from copy import copy
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Generator
 
 from lxml import etree
 
-from ..task_collision import TaskCollision
-from ..xml_utils import XmlUtils
-from .action import Action
+from tasker.task_collision import TaskCollision
+
+from tasker.icons.icon import Icon
+from tasker.py.action import Action
+from tasker.py.profile_variable import ProfileVariable
+from tasker.xml.tasker_xml import TaskerXml
 
 from httpx import Client
-
-LOCAL_TASKS = '/sdcard/Tasker/tasks/'
 
 
 @dataclass
@@ -26,27 +27,34 @@ class Task:
     priority: int = 100
     collision: TaskCollision = TaskCollision.ABORT_NEW_TASK
 
+    awake: bool = False
+    notify: bool = False
+
+    profile_variables: list[ProfileVariable] = field(default_factory=list)
+
+    
     par1: Any = None
     par2: Any = None
 
     variables: dict[str, Any] = field(default_factory=dict)
 
+    icon: Icon | None = None
+
     def __call__(self, *args, **kwargs):
         for action in self._actions():
-            yield deepcopy(action)
+            yield copy(action)
 
     def to_string(self):
-        xml_utils = XmlUtils()
+        task_xml = TaskerXml(tasks=[self])
+        return task_xml.to_string()
 
-        xml_task = xml_utils.create_task(self.id, self.name, *self())
+    def export(self, directory: str | Path = '/sdcard/Tasker/tasks/'):
+        filepath = Path(directory)
 
-        return etree.tostring(xml_task, pretty_print=True).decode()
+        if filepath.is_dir():
+            filepath /= f'{self.name}.tsk.xml'
 
-    def export(self, directory: str | Path = LOCAL_TASKS):
-        filepath = Path(directory) / f'{self.name}.tsk.xml'
-
-        xml_string = self.to_string()
-        filepath.write_text(xml_string)
+        TaskerXml(tasks=[self]).export(filepath)
         return filepath
 
     def play(self):
