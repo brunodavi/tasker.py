@@ -1,5 +1,7 @@
 # TaskerPy
 
+[![Test Python 3.9 | 3.10 | 3.11][badge]][test-action]
+
 **TaskerPy** is a tool for creating Android automations using Python, simplifying the integration and control of tasks via Tasker.
 
 ## Requirements
@@ -102,6 +104,8 @@ TASKER_PY_ADDRESS=192.168.1.25
 
 After importing the project in Tasker, click "Save" (✓), then tap the three dots to exit the editor.
 
+[test-action]: https://github.com/brunodavi/tasker.py/actions/workflows/test.yml
+[badge]: https://github.com/brunodavi/tasker.py/actions/workflows/test.yml/badge.svg
 [python-org]: https://www.python.org
 [pdm-org]: https://pdm-project.org
 [tasker-trial]: https://tasker.joaoapps.com/download.html
