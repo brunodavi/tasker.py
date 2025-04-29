@@ -1,9 +1,21 @@
-name: Testes com PDM
+name: Test Python 3.9 | 3.10 | 3.11
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'pyproject.toml'
+      - 'pdm.lock'
+      - 'src/**/*.py'
+      - 'test/**/*.py'
+      - '.github/workflows/test.yml'
   pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'pdm.lock'
+      - 'src/**/*.py'
+      - 'test/**/*.py'
+      - '.github/workflows/test.yml'
 
 jobs:
   test:
