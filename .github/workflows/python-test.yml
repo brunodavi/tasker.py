@@ -1,0 +1,30 @@
+name: Testes com PDM
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar PDM
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: true
+
+      - name: Instalar dependências da aplicação
+        run: pdm install
+
+      - name: Instalar dependências de teste
+        run: pdm install -G test
+
+      - name: Executar testes
+        run: pdm test -k 'not action'
