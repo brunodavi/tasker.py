@@ -6,7 +6,7 @@
 
 - [Python][python-org] v3.10 or higher
 - [Tasker][tasker-trial] v6.2 or higher
-- The [TaskerPy][tasker-py] project imported in Tasker
+- The [TaskerPy][tasker-py] project imported in Tasker on Android
 
 ## Quick Start
 
@@ -58,9 +58,16 @@ eval $(pdm venv activate)
 Invoke-Expression (pdm venv activate)
 ```
 
-#### Requirement to lxml
-Need `libxml2` and `libxslt`
+#### Requirements to termux
 
+1. Install dependencies
+```bash
+apt install clang libxml2 libxslt
+```
+2. PDM v2.16.1
+```bash
+pip install pdm==2.16.1
+```
 
 ### Available Scripts
 
