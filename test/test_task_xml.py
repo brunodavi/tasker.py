@@ -8,6 +8,8 @@ from test.helpers.xml_reader import (
     xml_to_string
 )
 
+from test.helpers.str_exporter import tmp_export_str
+
 
 def test_beep_xml(beep_task):
     expected_xml = read_xml_task('beep.xml')
@@ -46,4 +48,7 @@ def test_task_profile_variable(flash_task):
 
     task_xml = TaskerXml(tasks=[flash_task]).to_xml()
     xml_string = xml_to_string(task_xml)
+
+    tmp_export_str('task_profile_exported.xml', xml_string)
+
     assert xml_string == expected_xml

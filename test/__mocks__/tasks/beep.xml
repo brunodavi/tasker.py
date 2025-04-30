@@ -14,7 +14,7 @@
       <Int sr="arg1" val="1000"/>
       <Int sr="arg2" val="50"/>
       <Int sr="arg3" val="3"/>
-      <Str sr="arg4" ve="3"/>
+      <Str sr="arg4"/>
     </Action>
   </Task>
 </TaskerData>
