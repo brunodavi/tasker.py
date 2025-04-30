@@ -5,7 +5,7 @@ MOCK_DIR = 'test/__mocks__'
 
 
 def xml_to_string(element_xml):
-    etree.tostring(element_xml, pretty_print=True, encoding='utf-8').decode()
+    return etree.tostring(element_xml, pretty_print=True, encoding='utf-8').decode()
 
 
 def read_xml(path):

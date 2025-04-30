@@ -2,8 +2,9 @@ from os import getenv
 
 from pytest import Function, fixture, mark
 
-from tasker.actions.alert import Beep, Flash
-from tasker.py import TaskerPy
+from tasker.actions.alert import Beep, Flash, Notify
+from tasker.profiles.time import Time
+from tasker.py import TaskerPy, Profile
 
 
 @fixture
@@ -40,3 +41,15 @@ def flash_task():
         yield Flash('Hello, World')
 
     return task_flash
+
+@fixture
+def time_profile(beep_task):
+    app = TaskerPy()
+
+    profile_creator = app.add_profile(
+        'Profile Time',
+        Time(12, 0, 20, 0).every_hour(2),
+        profile_id=1,
+    )
+
+    return profile_creator(beep_task)
