@@ -1,0 +1,20 @@
+<TaskerData sr="" dvi="1">
+  <Task sr="task">
+    <cdate>0</cdate>
+    <edate>1</edate>
+    <id>172601898</id>
+    <nme>task_beep</nme>
+    <pri>100</pri>
+    <rty>0</rty>
+    <showinnot>false</showinnot>
+    <stayawake>false</stayawake>
+    <Action sr="act0" ve="7">
+      <code>171</code>
+      <Int sr="arg0" val="8000"/>
+      <Int sr="arg1" val="1000"/>
+      <Int sr="arg2" val="50"/>
+      <Int sr="arg3" val="3"/>
+      <Str sr="arg4"/>
+    </Action>
+  </Task>
+</TaskerData>

@@ -10,6 +10,8 @@ from .project import Project
 from .scene import Scene
 from .task import Task
 
+from .event import Event
+
 
 @dataclass
 class TaskerPy:
@@ -61,11 +63,36 @@ class TaskerPy:
         hash_md5 = md5(name.encode()).hexdigest()
         return int(hash_md5[:7], 16)
 
+    def add_profile(
+        self,
+        name: str,
+        event: Event,
+        profile_id: int = None
+    ):
+        def decorator(task: Task):
+            profile = Profile(
+                profile_id,
+                task.id,
+                name,
+                event
+            )
+
+            if profile.id is None:
+                profile.id = self._generate_id(name)
+
+            if not (0 < profile.id < 1_000_000_000):
+                raise ValueError('Profile id invalid min: 0 max: 999_999_999')
+
+            self._profiles.append(profile)
+            return profile
+
+        return decorator
+
     def add_task(
         self,
-        name: str | None = None,
-        task_id: int | None = None,
-        output_variables: dict[str, str] | None = None,
+        name: str = None,
+        task_id: int = None,
+        output_variables: dict[str, str] = None,
     ):
         """
         Decorator to add a task to the TaskerPy application.

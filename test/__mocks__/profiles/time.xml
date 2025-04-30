@@ -1,4 +1,20 @@
 <TaskerData sr="" dvi="1">
+  <Profile sr="prof">
+    <cdate>0</cdate>
+    <edate>1</edate>
+    <flags>8</flags>
+    <id>1</id>
+    <mid0>172601898</mid0>
+    <nme>Profile Time</nme>
+    <Time sr="con0">
+      <fh>12</fh>
+      <fm>0</fm>
+      <rep>1</rep>
+      <repval>2</repval>
+      <th>20</th>
+      <tm>0</tm>
+    </Time>
+  </Profile>
   <Task sr="task">
     <cdate>0</cdate>
     <edate>1</edate>
@@ -14,7 +30,7 @@
       <Int sr="arg1" val="1000"/>
       <Int sr="arg2" val="50"/>
       <Int sr="arg3" val="3"/>
-      <Str sr="arg4" ve="3"/>
+      <Str sr="arg4"/>
     </Action>
   </Task>
 </TaskerData>
