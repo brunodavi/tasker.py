@@ -1,4 +1,5 @@
 from .action import Action
+from .event import Event
 from .main import TaskerPy
 from .profile import Profile
 from .profile_variable import ProfileVariable

@@ -85,7 +85,11 @@ class TaskXml(XmlBuilder):
     def to_xml(self):
         E = self.E
 
-        task_collision = int(self.task.collision)
+        task_id = str(self.task.id)
+        task_name = self.task.name
+        task_priority = str(self.task.priority)
+        task_collision = str(self.task.collision)
+
         notify = str(self.task.notify).lower()
         awake = str(self.task.awake).lower()
         profile_variables = self.task.profile_variables
@@ -98,10 +102,10 @@ class TaskXml(XmlBuilder):
         return E.Task(
             E.cdate('0'),
             E.edate('1'),
-            E.id(f'{self.task.id}'),
-            E.nme(self.task.name),
-            E.pri(f'{self.task.priority}'),
-            E.rty(f'{task_collision}'),
+            E.id(task_id),
+            E.nme(task_name),
+            E.pri(task_priority),
+            E.rty(task_collision),
             E.showinnot(notify),
             E.stayawake(awake),
             *self._actions_to_xml(*self.task()),
